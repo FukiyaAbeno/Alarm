@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>使い方 - 吹矢アラームちゃん</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      background: #fff8e1;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 0.5em;
+      overflow-x: auto;
+    }
+    code {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 0.6em 1.2em;
+      background: #e53935;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="content">読み込み中...</div>
+
+  <p><a class="back-button" href="index.html">← アラームに戻る</a></p>
+
+  <script>
+    fetch('readme.md')
+      .then(response => response.text())
+      .then(md => {
+        document.getElementById('content').innerHTML = marked.parse(md);
+      })
+      .catch(error => {
+        document.getElementById('content').textContent = 'READMEの読み込みに失敗しました。';
+        console.error('Error loading README.md:', error);
+      });
+  </script>
+</body>
+</html>
