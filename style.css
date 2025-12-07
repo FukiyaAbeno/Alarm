@@ -65,6 +65,7 @@ button.active {
 
 button.agree {
   background-color: #3fdd3f;
+  height: 60px;
 }
 
 footer {
