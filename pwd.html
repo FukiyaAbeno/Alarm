@@ -18,16 +18,16 @@
       .then(response => {
         if (!response.ok) {
           throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-          location.href = 'test.html';
+          location.href = 'index.html';
         }
       })
       .then(data => {
         location.href = PASS + '.html';
       })
       .catch(error => {
-        location.href = 'test.html';
+        location.href = 'index.html';
       });
   </script>
-  <p><a class="back-button" href="test.html">前ページに戻る</a></p>
+  <p><a class="back-button" href="index.html">前ページに戻る</a></p>
 </body>
 </html>
