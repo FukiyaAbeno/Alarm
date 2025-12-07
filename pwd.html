@@ -9,11 +9,13 @@
     try {
       const response = fetch(PASS + '.html');
       if (!response.ok) {
-        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        // throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        location.href = 'pwd.html';
       }
       location.href = PASS + '.html';
     } catch (error) {
-        document.getElementByID('content').textContent = 'パスワード認証エラー';
+        // document.getElementByID('content').textContent = 'パスワード認証エラー';
+        location.href = 'pwd.html';
     }
   </script>
   <style>
