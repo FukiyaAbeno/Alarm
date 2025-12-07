@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>吹矢アラームちゃん・パスワード認証</title>
+  <script>
+    PASS = prompt('パスワードを入力してください。');
+    fetch(PASS + '.html')
+      .then(location.href = PASS + '.html');
+      .catch(error => {
+        document.getElementByID('content').testContent = 'パスワード認証エラー';
+        });
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 1em;
+      background: #fff8e1;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    pre {
+      background: #f0f0f0;
+      padding: 0.5em;
+      overflow-x: auto;
+    }
+    code {
+      background: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+    }
+    .back-button {
+      display: inline-block;
+      margin-top: 1.5em;
+      padding: 0.6em 1.2em;
+      background: #e53935;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="content"></div>
+  <!-- <p><a class="back-button" href="index.html">前ページに戻る</a></p> -->
+</body>
+</html>
