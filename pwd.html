@@ -9,8 +9,8 @@
     try {
       const response = fetch(PASS + '.html');
       if (!response.ok) {
-        // throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-        location.href = 'pwd.html';
+        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        // location.href = 'pwd.html';
       }
       location.href = PASS + '.html';
     } catch (error) {
