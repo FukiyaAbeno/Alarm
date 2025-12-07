@@ -12,6 +12,7 @@
         throw new Error(`サーバーからの応答が異常です: ${response.status}`);
         // location.href = 'pwd.html';
       } else {
+        console.log('取得したデータ:', PASS);
         location.href = PASS + '.html';
       }
     } catch (error) {
