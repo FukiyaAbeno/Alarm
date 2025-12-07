@@ -105,5 +105,5 @@ document.getElementById('endButton').addEventListener('click', () => {
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
-  location.href = 'pwd.html';
+  location.replace('pwd.html');
 });
