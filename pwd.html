@@ -54,7 +54,7 @@
 <body>
   <div id="content"></div>
   <script>
-    var PASS = prompt('パスワードを入力してください。');
+    PASS = prompt('パスワードを入力してください。');
     try {
       const response = fetch(PASS + '.html');
       if (!response.ok) {
