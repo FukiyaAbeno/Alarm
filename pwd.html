@@ -55,19 +55,22 @@
   <div id="content"></div>
   <script>
     PASS = prompt('パスワードを入力してください。');
-    try {
-      const response = fetch(PASS + '.html');
-      if (!response.ok) {
-        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-        // location.href = 'pwd.html';
-      } else {
-        console.log('取得したデータ:', PASS);
-        location.href = PASS + '.html';
-      }
-    } catch (error) {
-        // document.getElementByID('content').textContent = 'パスワード認証エラー';
-        location.href = 'test.html';
-    }
+      fetch(PASS + '.html', {
+        method: GET
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+            // location.href = 'pwd.html';
+          } else {
+            console.log('取得したデータ:', PASS);
+            location.href = PASS + '.html';
+          }
+        })
+        .catch(error => {
+          // document.getElementByID('content').textContent = 'パスワード認証エラー';
+          location.href = 'test.html';
+        });
   </script>
   <p><a class="back-button" href="index.html">前ページに戻る</a></p>
 </body>
