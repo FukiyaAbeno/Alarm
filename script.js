@@ -103,3 +103,7 @@ document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
 });
+
+document.getElementById('agreeButton').addEventListener('click', () => {
+  location.href = 'pwd.html';
+});
