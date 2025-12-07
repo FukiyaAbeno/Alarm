@@ -6,11 +6,15 @@
   <title>吹矢アラームちゃん・パスワード認証</title>
   <script>
     var PASS = prompt('パスワードを入力してください。');
-    fetch(PASS + '.html')
-      .then(location.href = PASS + '.html');
-      .catch(error => {
-        document.getElementByID('content').testContent = 'パスワード認証エラー';
-        });
+    try {
+      const response = fetch(PASS + '.html');
+      if (!response.ok) {
+        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+      }
+      location.href = PASS + '.html';
+    } catch (error) {
+        document.getElementByID('content').textContent = 'パスワード認証エラー';
+    }
   </script>
   <style>
     body {
