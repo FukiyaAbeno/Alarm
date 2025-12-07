@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>吹矢アラームちゃん・パスワード認証</title>
-  <script>
+  <!-- <script>
     var PASS = prompt('パスワードを入力してください。');
     try {
       const response = fetch(PASS + '.html');
@@ -19,7 +19,7 @@
         // document.getElementByID('content').textContent = 'パスワード認証エラー';
         location.href = 'test.html';
     }
-  </script>
+  </script> -->
   <style>
     body {
       font-family: sans-serif;
@@ -53,6 +53,22 @@
 </head>
 <body>
   <div id="content"></div>
-  <!-- <p><a class="back-button" href="index.html">前ページに戻る</a></p> -->
+  <script>
+    var PASS = prompt('パスワードを入力してください。');
+    try {
+      const response = fetch(PASS + '.html');
+      if (!response.ok) {
+        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
+        // location.href = 'pwd.html';
+      } else {
+        console.log('取得したデータ:', PASS);
+        location.href = PASS + '.html';
+      }
+    } catch (error) {
+        // document.getElementByID('content').textContent = 'パスワード認証エラー';
+        location.href = 'test.html';
+    }
+  </script>
+  <p><a class="back-button" href="index.html">前ページに戻る</a></p>
 </body>
 </html>
