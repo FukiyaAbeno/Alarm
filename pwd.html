@@ -4,54 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>吹矢アラームちゃん・パスワード認証</title>
-  <!-- <script>
-    var PASS = prompt('パスワードを入力してください。');
-    try {
-      const response = fetch(PASS + '.html');
-      if (!response.ok) {
-        throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-        // location.href = 'pwd.html';
-      } else {
-        console.log('取得したデータ:', PASS);
-        location.href = PASS + '.html';
-      }
-    } catch (error) {
-        // document.getElementByID('content').textContent = 'パスワード認証エラー';
-        location.href = 'test.html';
-    }
-  </script> -->
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 1em;
-      background: #fff8e1;
-    }
-    h1, h2 {
-      color: #333;
-    }
-    pre {
-      background: #f0f0f0;
-      padding: 0.5em;
-      overflow-x: auto;
-    }
-    code {
-      background: #eee;
-      padding: 0.2em 0.4em;
-      border-radius: 4px;
-    }
-    .back-button {
-      display: inline-block;
-      margin-top: 1.5em;
-      padding: 0.6em 1.2em;
-      background: #e53935;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="icon-512.png">
+  <meta name="theme-color" content="#e53935">
 </head>
 <body>
+  <h1>吹矢アラームちゃん</h1>
+  <div style="font-size: 0.8em; color: #666;">v.1.3.1</div>
   <div id="content"></div>
   <script>
     PASS = prompt('パスワードを入力してください。');
@@ -59,9 +18,6 @@
       .then(response => {
         if (!response.ok) {
           throw new Error(`サーバーからの応答が異常です: ${response.status}`);
-          // location.href = 'pwd.html';
-        // } else {
-        //   console.log('取得したデータ:', PASS);
           location.href = 'test.html';
         }
       })
@@ -69,7 +25,6 @@
         location.href = PASS + '.html';
       })
       .catch(error => {
-        // document.getElementByID('content').textContent = 'パスワード認証エラー';
         location.href = 'test.html';
       });
   </script>
