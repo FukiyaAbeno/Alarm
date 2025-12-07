@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>吹矢アラームちゃん・パスワード認証</title>
   <script>
-    PASS = prompt('パスワードを入力してください。');
+    var PASS = prompt('パスワードを入力してください。');
     fetch(PASS + '.html')
       .then(location.href = PASS + '.html');
       .catch(error => {
