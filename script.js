@@ -118,25 +118,25 @@ document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
   document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.add('pause');
+  document.getElementById('pauseButton').classList.add('enabled');
   document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.add('paused');
+  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('pauseButton').addEventListener('click', () => {
   pauseTimer();
-  document.getElementById('resumeButton').disabled = false;
-  document.getElementById('resumeButton').classList.add('resume');
   document.getElementById('pauseButton').disabled = true;
-  document.getElementById('pauseButton').classList.add('paused');
+  document.getElementById('pauseButton').classList.add('disabled');
+  document.getElementById('resumeButton').disabled = false;
+  document.getElementById('resumeButton').classList.add('enabled');
 });
 
 document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
-  document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.add('pause');
   document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.add('paused');
+  document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
