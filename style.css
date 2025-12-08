@@ -63,6 +63,24 @@ button.active {
   box-shadow: 0 0 5px #2196f3;
 }
 
+button.pause {
+  background-color: #3f4add;
+  width: 150px;
+  height: 60px;
+}
+
+button.paused {
+  background-color: #636364;
+  width: 150px;
+  height: 60px;
+}
+
+button.resume {
+  background-color: #3f4add;
+  width: 150px;
+  height: 60px;
+}
+
 button.agree {
   background-color: #3fdd3f;
   height: 60px;

@@ -30,6 +30,7 @@ function updateTimerDisplay(secondsLeft) {
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
   document.getElementById('skipButton').classList.remove('active');
+  document.getElementById('pauseButton').classList.remove('paused')
 }
 
 function resetTimer() {
@@ -38,6 +39,8 @@ function resetTimer() {
   startTimestamp = null;
   played30 = false;
   played3min = false;
+  pauseTimestamp = null;
+  isPaused = false;
   updateTimerDisplay(180);
   resetButtonStates();
   document.getElementById('skipButton').disabled = true;
@@ -45,41 +48,53 @@ function resetTimer() {
 
 function startTimer() {
   startTimestamp = Date.now();
+  pauseTimestamp = Date.now();
   document.getElementById('skipButton').disabled = false;
-
+  paused = 0;
   countdownInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTimestamp) / 1000);
-    const remaining = 180 - elapsed;
+    elapsed = Math.floor((Date.now() - startTimestamp) / 1000);
+    // console.log("elapsed: ", elapsed, " paused: ", paused, "remain: ", remaining);
+    if (isPaused) {
+      paused = Math.floor((Date.now() - pauseTimestamp) / 1000);
+    } else {
+      remaining = 180 - elapsed + paused;
+      updateTimerDisplay(Math.max(remaining, 0));
+      if (!played30 && elapsed >= 150) {
+        audio2min30.play().catch(e => {
+          console.log("30秒前再生失敗", e);
+          const debugEl = document.getElementById("debug");
+          if (debugEl) {
+            debugEl.textContent = "30秒前エラー: " + e.message;
+          }
+        });
+        played30 = true;
+      }
 
-    updateTimerDisplay(Math.max(remaining, 0));
-
-    if (!played30 && elapsed >= 150) {
-      audio2min30.play().catch(e => {
-        console.log("30秒前再生失敗", e);
-        const debugEl = document.getElementById("debug");
-        if (debugEl) {
-          debugEl.textContent = "30秒前エラー: " + e.message;
+      if (!played3min && elapsed >= 180) {
+        played3min = true;
+        document.getElementById('skipButton').disabled = true;
+        clearInterval(countdownInterval);
+        if (skipped) {
+          audio3minHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
+        } else {
+          audio3min.play().catch(e => console.log("3分再生失敗", e));
+          setTimeout(() => {
+            audioFinish.play().catch(e => console.log("終了再生失敗", e));
+            resetTimer();
+          }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
         }
-      });
-      played30 = true;
-    }
-
-    if (!played3min && elapsed >= 180) {
-      played3min = true;
-      document.getElementById('skipButton').disabled = true;
-      clearInterval(countdownInterval);
-
-      if (skipped) {
-        audio3minHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
-      } else {
-        audio3min.play().catch(e => console.log("3分再生失敗", e));
-        setTimeout(() => {
-          audioFinish.play().catch(e => console.log("終了再生失敗", e));
-          resetTimer();
-        }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
       }
     }
   }, 500);
+}
+
+function pauseTimer() {
+  isPaused = true;
+  pauseTimestamp = Date.now();
+}
+
+function resumeTimer() {
+  isPaused = false;
 }
 
 document.getElementById('startButton').addEventListener('click', () => {
@@ -102,6 +117,26 @@ document.getElementById('skipButton').addEventListener('click', () => {
 document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.add('pause');
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.add('paused');
+});
+
+document.getElementById('pauseButton').addEventListener('click', () => {
+  pauseTimer();
+  document.getElementById('resumeButton').disabled = false;
+  document.getElementById('resumeButton').classList.add('resume');
+  document.getElementById('pauseButton').disabled = true;
+  document.getElementById('pauseButton').classList.add('paused');
+});
+
+document.getElementById('resumeButton').addEventListener('click', () => {
+  resumeTimer();
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.add('pause');
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.add('paused');
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
