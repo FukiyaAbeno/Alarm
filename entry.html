@@ -13,8 +13,8 @@
   <h1>吹矢アラームちゃん</h1>
   <div id="content"></div>
   <script>
-    PASS = prompt('日本スポーツウエルネス吹矢協会の会員番号を入力してください。');
-    fetch(PASS + '.html')
+    memberID = prompt('日本スポーツウエルネス吹矢協会の会員番号を入力してください。');
+    fetch(memberID + '.html')
       .then(response => {
         if (!response.ok) {
           throw new Error(`サーバーからの応答が異常です: ${response.status}`);
@@ -22,7 +22,7 @@
         }
       })
       .then(data => {
-        location.href = PASS + '.html';
+        location.href = memberID + '.html';
       })
       .catch(error => {
         location.href = 'index.html';

@@ -1,11 +1,11 @@
-window.onload = function() {
-    const myregex = new RegExp('/Alarm/entry\.html$');
-    var ref = document.referrer;
-    var result = ref.match(myregex)
-    if(!result) {
-        location.href = 'entry.html'
-    }
-};
+// window.onload = function() {
+//     const myregex = new RegExp('/Alarm/entry\.html$');
+//     var ref = document.referrer;
+//     var result = ref.match(myregex)
+//     if(!result) {
+//         location.href = 'entry.html'
+//     }
+// };
 
 fetch('version.txt')
     .then(response => {

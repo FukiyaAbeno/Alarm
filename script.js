@@ -146,6 +146,18 @@ document.getElementById('resumeButton').addEventListener('click', () => {
   document.getElementById('resumeButton').classList.remove('enabled');
 });
 
+document.getElementById('adjtimeButton').addEventListener('click', () => {
+  adjtime = prompt('残り時間（秒数）を入力してください', Duration);
+  if (adjtime === null) {
+    newtime = Duration;
+  } else if (value === "") {
+    newtime = Duration;
+  } else {
+    newtime = +value;
+  };
+  Duration = newtime;
+});
+
 document.getElementById('agreeButton').addEventListener('click', () => {
   location.replace('pwd.html');
 });
