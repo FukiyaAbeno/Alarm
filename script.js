@@ -30,8 +30,12 @@ function updateTimerDisplay(secondsLeft) {
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
   document.getElementById('skipButton').classList.remove('active');
+  document.getElementById('skipButton').disabled = true;
   document.getElementById('pauseButton').classList.remove('disabled')
+  document.getElementById('pauseButton').classList.add('enabled');
   document.getElementById('resumeButton').classList.remove('enabled')
+  document.getElementById('resumeButton').classList.add('disabled');
+  document.getElementById('resumeButton').disabled = true;
 }
 
 function resetTimer() {
@@ -44,7 +48,6 @@ function resetTimer() {
   isPaused = false;
   updateTimerDisplay(180);
   resetButtonStates();
-  document.getElementById('skipButton').disabled = true;
 }
 
 function startTimer() {
@@ -92,10 +95,24 @@ function startTimer() {
 function pauseTimer() {
   isPaused = true;
   pauseTimestamp = Date.now();
+  document.getElementById('pauseButton').textContent = '一時停止中'
+  document.getElementById('pauseButton').disabled = true;
+  // document.getElementById('pauseButton').classList.remove('enabled');
+  document.getElementById('pauseButton').classList.add('disabled');
+  document.getElementById('resumeButton').disabled = false;
+  // document.getElementById('resumeButton').classList.remove('disabled');
+  document.getElementById('resumeButton').classList.add('enabled');
 }
 
 function resumeTimer() {
   isPaused = false;
+  document.getElementById('pauseButton').textContent = '一時停止'
+  document.getElementById('pauseButton').disabled = false;
+  // document.getElementById('pauseButton').classList.remove('disabled');
+  document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('resumeButton').disabled = true;
+  // document.getElementById('resumeButton').classList.remove('enabled');
+  document.getElementById('resumeButton').classList.add('disabled');
 }
 
 document.getElementById('startButton').addEventListener('click', () => {
@@ -118,33 +135,14 @@ document.getElementById('skipButton').addEventListener('click', () => {
 document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
-  document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.remove('disabled');
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('pauseButton').addEventListener('click', () => {
   pauseTimer();
-  document.getElementById('pauseButton').textContent = '一時停止中'
-  document.getElementById('pauseButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('enabled');
-  document.getElementById('pauseButton').classList.add('disabled');
-  document.getElementById('resumeButton').disabled = false;
-  // document.getElementById('resumeButton').classList.remove('disabled');
-  document.getElementById('resumeButton').classList.add('enabled');
 });
 
 document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
-  document.getElementById('pauseButton').textContent = '一時停止'
-  document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.remove('disabled');
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').disabled = true;
-  // document.getElementById('resumeButton').classList.remove('enabled');
-  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
