@@ -1,5 +1,13 @@
-const filePath = 'version.txt';
-fetch(filePath)
+window.onload = function() {
+    const myregex = new RegExp('/Alarm/pwd\.html$');
+    var ref = document.referrer;
+    var result = ref.match(myregex)
+    if(!result) {
+        location.href = 'index.html'
+    }
+};
+
+fetch('version.txt')
     .then(response => {
         if (!response.ok) {
             throw new Error('HTTP error! status: ' + response.status);
