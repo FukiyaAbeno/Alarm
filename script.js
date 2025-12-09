@@ -146,6 +146,7 @@ document.getElementById('skipButton').addEventListener('click', () => {
 document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
+  run_stat = "stop";
 });
 
 document.getElementById('pauseButton').addEventListener('click', () => {
