@@ -156,6 +156,8 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
     newtime = +value;
   };
   Duration = newtime;
+  remaining = Duration - elapsed + paused;
+  updateTimerDisplay(Math.max(remaining, 0));
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
