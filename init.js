@@ -3,7 +3,7 @@ window.onload = function() {
     var ref = document.referrer;
     var result = ref.match(myregex)
     if(!result) {
-        location.href = 'index.html'
+        location.href = 'pwd.html'
     }
 };
 
