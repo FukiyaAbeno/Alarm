@@ -1,6 +1,6 @@
 {
   "name": "吹き矢アラームちゃん",
-  "short_name": "吹き矢",
+  "short_name": "吹き矢アラームちゃん",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fff8e1",
