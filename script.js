@@ -172,7 +172,6 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
   diff_remain = new_remain - prev_remain;
   Duration += diff_remain;
   updateTimerDisplay(Math.max(new_remain, 0));
-  resumeTimer();
   if (run_stat === "stop") {
     document.getElementById('pauseButton').disabled = true;
     document.getElementById('pauseButton').classList.remove('enabled');
