@@ -158,19 +158,19 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
   pauseTimer();
-  remaining = Duration - elapsed + paused;
-  console.log("Duration: ", Duration);
-  console.log("remaining: ", remaining);
+  prev_remain = Duration - elapsed + paused;
   newtime = prompt('残り時間（秒数）を入力してください', remaining);
-  console.log("newtime: ", newtime);
   if (newtime === null) {
-    newtime = remaining;
+    newtime = prev_remain;
   } else if (newtime === "") {
-    newtime = remaining;
+    newtime = prev_remain;
   } else if (!isFinite(newtime)) {
-    newtime = remaining;
+    newtime = prev_remain;
   };
-  updateTimerDisplay(Math.max(remaining, 0));
+  new_remain = newtime;
+  diff_remain = new_remain - prev_remain;
+  Duration += diff_remain;
+  updateTimerDisplay(Math.max(new_remain, 0));
   resumeTimer();
   if (run_stat === "stop") {
     document.getElementById('pauseButton').disabled = true;
