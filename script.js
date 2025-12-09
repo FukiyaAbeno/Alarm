@@ -118,6 +118,11 @@ document.getElementById('skipButton').addEventListener('click', () => {
 document.getElementById('endButton').addEventListener('click', () => {
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.remove('disabled');
+  document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('pauseButton').addEventListener('click', () => {
