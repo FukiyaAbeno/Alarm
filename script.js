@@ -156,6 +156,7 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 document.getElementById('adjtimeButton').addEventListener('click', () => {
   pauseTimer();
   remaining = Duration - elapsed + paused;
+  console.log("Duration: ", Duration);
   console.log("remaining: ", remaining);
   newtime = prompt('残り時間（秒数）を入力してください', remaining);
   console.log("newtime: ", newtime);
