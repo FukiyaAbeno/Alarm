@@ -97,10 +97,8 @@ function pauseTimer() {
   pauseTimestamp = Date.now();
   document.getElementById('pauseButton').textContent = '一時停止中'
   document.getElementById('pauseButton').disabled = true;
-  // document.getElementById('pauseButton').classList.remove('enabled');
   document.getElementById('pauseButton').classList.add('disabled');
   document.getElementById('resumeButton').disabled = false;
-  // document.getElementById('resumeButton').classList.remove('disabled');
   document.getElementById('resumeButton').classList.add('enabled');
 }
 
@@ -108,10 +106,8 @@ function resumeTimer() {
   isPaused = false;
   document.getElementById('pauseButton').textContent = '一時停止'
   document.getElementById('pauseButton').disabled = false;
-  // document.getElementById('pauseButton').classList.remove('disabled');
   document.getElementById('pauseButton').classList.add('enabled');
   document.getElementById('resumeButton').disabled = true;
-  // document.getElementById('resumeButton').classList.remove('enabled');
   document.getElementById('resumeButton').classList.add('disabled');
 }
 
