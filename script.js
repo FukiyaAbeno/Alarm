@@ -31,9 +31,8 @@ function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
   document.getElementById('skipButton').classList.remove('active');
   document.getElementById('skipButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('disabled')
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').classList.remove('enabled')
+  document.getElementById('pauseButton').classList.add('disabled');
+  document.getElementById('pauseButton').disabled = true;
   document.getElementById('resumeButton').classList.add('disabled');
   document.getElementById('resumeButton').disabled = true;
 }
@@ -115,7 +114,9 @@ document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
-  audioStart.play().catch(e => console.log("開始再生失敗", e));
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.add('enabled');
+audioStart.play().catch(e => console.log("開始再生失敗", e));
 
   setTimeout(() => {
     startTimer();
