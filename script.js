@@ -138,7 +138,7 @@ document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
   document.getElementById('pauseButton').textContent = '一時停止'
   document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.remove('disabled');
+  document.getElementById('pauseButton').classList.add('enabled');
   document.getElementById('resumeButton').disabled = true;
   document.getElementById('resumeButton').classList.remove('enabled');
 });
