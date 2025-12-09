@@ -123,8 +123,10 @@ document.getElementById('endButton').addEventListener('click', () => {
 document.getElementById('pauseButton').addEventListener('click', () => {
   pauseTimer();
   document.getElementById('pauseButton').disabled = true;
+  document.getElementById('pauseButton').classList.remove('enabled');
   document.getElementById('pauseButton').classList.add('disabled');
   document.getElementById('resumeButton').disabled = false;
+  document.getElementById('resumeButton').classList.remove('disabled');
   document.getElementById('resumeButton').classList.add('enabled');
 });
 
@@ -132,8 +134,10 @@ document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
   document.getElementById('pauseButton').disabled = false;
   document.getElementById('pauseButton').classList.remove('disabled');
+  document.getElementById('pauseButton').classList.add('enabled');
   document.getElementById('resumeButton').disabled = true;
   document.getElementById('resumeButton').classList.remove('enabled');
+  document.getElementById('resumeButton').classList.add('disabled');
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
