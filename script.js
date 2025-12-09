@@ -51,6 +51,8 @@ function resetTimer() {
   played3min = false;
   pauseTimestamp = null;
   isPaused = false;
+  elapsed = 0;
+  paused = 0;
   updateTimerDisplay(Duration);
   resetButtonStates();
 }
