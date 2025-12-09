@@ -171,7 +171,3 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
   updateTimerDisplay(Math.max(remaining, 0));
   resumeTimer();
 });
-
-document.getElementById('agreeButton').addEventListener('click', () => {
-  location.replace('pwd.html');
-});
