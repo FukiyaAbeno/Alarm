@@ -10,6 +10,9 @@ let remaining = Duration;
 let played30 = false;
 let played3min = false;
 
+let elapsed = 0;
+let paused = 0;
+
 // 事前にAudioを生成
 let audioStart = new Audio('audio/start.m4a');
 let audio2min30 = new Audio('audio/2min30sec.m4a');
