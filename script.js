@@ -153,7 +153,7 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
   } else if (value === "") {
     newtime = Duration;
   } else {
-    newtime = +value;
+    newtime = +adjtime;
   };
   Duration = newtime;
   remaining = Duration - elapsed + paused;
