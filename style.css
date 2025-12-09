@@ -45,24 +45,6 @@ button {
   line-height: 1;
 }
 
-button.yellow {
-  background-color: #fdd835;
-  color: black;
-}
-
-button.red {
-  background-color: #e53935;
-}
-
-button.black {
-  background-color: #424242;
-}
-
-button.active {
-  outline: 3px solid #2196f3;
-  box-shadow: 0 0 5px #2196f3;
-}
-
 button.pause {
   width: 153px;
   height: 60px;
@@ -78,10 +60,6 @@ button.pause {
   color: white;
   text-align: center;
   line-height: 1;
-}
-
-button.enabled {
-  background-color: #3f4add;
 }
 
 button.adjtime {
@@ -104,6 +82,28 @@ button.adjtime {
 button.agree {
   background-color: #3fdd3f;
   height: 60px;
+}
+
+button.yellow {
+  background-color: #fdd835;
+  color: black;
+}
+
+button.red {
+  background-color: #e53935;
+}
+
+button.black {
+  background-color: #424242;
+}
+
+button.active {
+  outline: 3px solid #2196f3;
+  box-shadow: 0 0 5px #2196f3;
+}
+
+button.enabled {
+  background-color: #3f4add;
 }
 
 footer {

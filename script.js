@@ -109,26 +109,12 @@ function resumeTimer() {
   isPaused = false;
 }
 
-function adjTime() {
-  remaining = Duration - elapsed + paused;
-  adjtime = prompt('残り時間（秒数）を入力してください', remaining);
-  if (adjtime === null) {
-    newtime = remaining;
-  } else if (value === "") {
-    newtime = remaining;
-  } else if(!isNaN(num)) {
-    newtime = remaining;
-  } else {
-    newtime = +adjtime;
-  };
-  remaining = newtime;
-  updateTimerDisplay(Math.max(remaining, 0));
-}
 document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
   document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('pauseButton').disabled = false;
   audioStart.play().catch(e => console.log("開始再生失敗", e));
   setTimeout(() => {
     startTimer();
@@ -166,17 +152,18 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
   remaining = Duration - elapsed + paused;
-  adjtime = prompt('残り時間（秒数）を入力してください', remaining);
-  if (adjtime === null) {
+  console.log("remaining: ", remaining);
+  newtime = prompt('残り時間（秒数）を入力してください', remaining);
+  console.log("newtime: ", newtime);
+  if (newtime === null) {
     newtime = remaining;
-  } else if (value === "") {
+  } else if (newtime === "") {
     newtime = remaining;
-  } else if(!isNaN(num)) {
+  } else if (!isFinite(newtime)) {
     newtime = remaining;
-  } else {
-    newtime = +adjtime;
   };
-  remaining = newtime;
+  Duration = Duration + (+newtime - remaining);
+  console.log("new Duration: ", Duration);
   updateTimerDisplay(Math.max(remaining, 0));
 });
 
