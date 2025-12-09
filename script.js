@@ -103,10 +103,20 @@ function startTimer() {
 function pauseTimer() {
   isPaused = true;
   pauseTimestamp = Date.now();
+  document.getElementById('pauseButton').textContent = '一時停止中'
+  document.getElementById('pauseButton').disabled = true;
+  document.getElementById('pauseButton').classList.remove('enabled');
+  document.getElementById('resumeButton').disabled = false;
+  document.getElementById('resumeButton').classList.add('enabled');
 }
 
 function resumeTimer() {
   isPaused = false;
+  document.getElementById('pauseButton').textContent = '一時停止'
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.remove('enabled');
 }
 
 document.getElementById('startButton').addEventListener('click', () => {
@@ -134,23 +144,14 @@ document.getElementById('endButton').addEventListener('click', () => {
 
 document.getElementById('pauseButton').addEventListener('click', () => {
   pauseTimer();
-  document.getElementById('pauseButton').textContent = '一時停止中'
-  document.getElementById('pauseButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('enabled');
-  document.getElementById('resumeButton').disabled = false;
-  document.getElementById('resumeButton').classList.add('enabled');
 });
 
 document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
-  document.getElementById('pauseButton').textContent = '一時停止'
-  document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.remove('enabled');
 });
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
+  pauseTimer();
   remaining = Duration - elapsed + paused;
   console.log("remaining: ", remaining);
   newtime = prompt('残り時間（秒数）を入力してください', remaining);
@@ -165,6 +166,7 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
   Duration = Duration + (+newtime - remaining);
   console.log("new Duration: ", Duration);
   updateTimerDisplay(Math.max(remaining, 0));
+  resumeTimer();
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
