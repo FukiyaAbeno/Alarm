@@ -64,7 +64,7 @@ button.active {
 }
 
 button.pause {
-  width: 150px;
+  width: 153px;
   height: 60px;
   background-color: #636364;
   display: flex;
@@ -85,7 +85,7 @@ button.enabled {
 }
 
 button.adjtime {
-  width: 300px;
+  width: 314px;
   height: 60px;
   background-color: #3fdd3f;
   display: flex;
