@@ -163,7 +163,19 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 });
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
-  adjTime();
+  remaining = Duration - elapsed + paused;
+  adjtime = prompt('残り時間（秒数）を入力してください', remaining);
+  if (adjtime === null) {
+    newtime = remaining;
+  } else if (value === "") {
+    newtime = remaining;
+  } else if(!isNaN(num)) {
+    newtime = remaining;
+  } else {
+    newtime = +adjtime;
+  };
+  remaining = newtime;
+  updateTimerDisplay(Math.max(remaining, 0));
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
