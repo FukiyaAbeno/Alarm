@@ -3,6 +3,9 @@ let countdownInterval;
 let skipped = false;
 let startTimestamp = null;
 
+let Duration = 180;
+let AlartSec = Duration - 30;
+
 let played30 = false;
 let played3min = false;
 
@@ -47,7 +50,7 @@ function resetTimer() {
   played3min = false;
   pauseTimestamp = null;
   isPaused = false;
-  updateTimerDisplay(180);
+  updateTimerDisplay(Duration);
   resetButtonStates();
 }
 
@@ -63,9 +66,9 @@ function startTimer() {
     if (isPaused) {
       paused = Math.floor((Date.now() - pauseTimestamp) / 1000);
     } else {
-      remaining = 180 - elapsed + paused;
+      remaining = Duration - elapsed + paused;
       updateTimerDisplay(Math.max(remaining, 0));
-      if (!played30 && elapsed >= 150) {
+      if (!played30 && elapsed >= AlartSec) {
         audio2min30.play().catch(e => {
           console.log("30秒前再生失敗", e);
           const debugEl = document.getElementById("debug");
@@ -76,7 +79,7 @@ function startTimer() {
         played30 = true;
       }
 
-      if (!played3min && elapsed >= 180) {
+      if (!played3min && elapsed >= Duration) {
         played3min = true;
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
