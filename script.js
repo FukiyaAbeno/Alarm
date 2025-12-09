@@ -106,6 +106,21 @@ function resumeTimer() {
   isPaused = false;
 }
 
+function adjTime() {
+  remaining = Duration - elapsed + paused;
+  adjtime = prompt('残り時間（秒数）を入力してください', remaining);
+  if (adjtime === null) {
+    newtime = remaining;
+  } else if (value === "") {
+    newtime = remaining;
+  } else if(!isNaN(num)) {
+    newtime = remaining;
+  } else {
+    newtime = +adjtime;
+  };
+  remaining = newtime;
+  updateTimerDisplay(Math.max(remaining, 0));
+}
 document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
   preloadAudios();
@@ -147,17 +162,7 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 });
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
-  adjtime = prompt('残り時間（秒数）を入力してください', Duration);
-  if (adjtime === null) {
-    newtime = Duration;
-  } else if (value === "") {
-    newtime = Duration;
-  } else {
-    newtime = +adjtime;
-  };
-  Duration = newtime;
-  remaining = Duration - elapsed + paused;
-  updateTimerDisplay(Math.max(remaining, 0));
+  adjTime();
 });
 
 document.getElementById('agreeButton').addEventListener('click', () => {
