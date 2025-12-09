@@ -12,6 +12,7 @@ let played3min = false;
 
 let elapsed = 0;
 let paused = 0;
+let run_stat = "stop";
 
 // 事前にAudioを生成
 let audioStart = new Audio('audio/start.m4a');
@@ -56,6 +57,7 @@ function resetTimer() {
   isPaused = false;
   elapsed = 0;
   paused = 0;
+  run_stat = "stop";
   updateTimerDisplay(Duration);
   resetButtonStates();
 }
@@ -130,6 +132,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   document.getElementById('pauseButton').disabled = false;
   audioStart.play().catch(e => console.log("開始再生失敗", e));
   setTimeout(() => {
+    run_stat = "start";
     startTimer();
   }, 4000);
 });
@@ -167,8 +170,10 @@ document.getElementById('adjtimeButton').addEventListener('click', () => {
   } else if (!isFinite(newtime)) {
     newtime = remaining;
   };
-  Duration = Duration + (+newtime - remaining);
-  console.log("new Duration: ", Duration);
   updateTimerDisplay(Math.max(remaining, 0));
   resumeTimer();
+  if (run_stat === "stop") {
+    document.getElementById('pauseButton').disabled = true;
+    document.getElementById('pauseButton').classList.remove('enabled');
+  }
 });
