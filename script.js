@@ -5,6 +5,7 @@ let startTimestamp = null;
 
 let Duration = 180;
 let AlartSec = Duration - 30;
+let remaining = Duration;
 
 let played30 = false;
 let played3min = false;
