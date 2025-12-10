@@ -17,7 +17,7 @@ h1 {
 }
 
 #timerDisplay {
-  font-size: 6em;
+  font-size: 5em;
   margin: 0.5em 0;
 }
 
@@ -31,7 +31,7 @@ h1 {
 
 button {
   width: 100px;
-  height: 100px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
