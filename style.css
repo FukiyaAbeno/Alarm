@@ -45,7 +45,7 @@ button {
   line-height: 1;
 }
 
-button.pause {
+/* button.pause {
   width: 153px;
   height: 60px;
   background-color: #c6c6c9;
@@ -60,9 +60,9 @@ button.pause {
   color: white;
   text-align: center;
   line-height: 1;
-}
+} */
 
-button.adjtime {
+/* button.adjtime {
   width: 314px;
   height: 60px;
   background-color: #3fdd3f;
@@ -77,7 +77,7 @@ button.adjtime {
   color: black;
   text-align: center;
   line-height: 1;
-}
+} */
 
 button.agree {
   background-color: #3fdd3f;
@@ -90,10 +90,14 @@ button.yellow {
 }
 
 button.red {
-  background-color: #e53935;
+  background-color: #ff7b78;
   width: 302px;
   animation: none;
 }
+button.redactive {
+  background-color: #f70400;
+}
+
 
 button.black {
   background-color: #424242;
@@ -109,15 +113,12 @@ button.enabled {
 }
 
 button.blink {
-  animation: blinkAnime 1s infinite alternate;
+  animation:blink 3s infinite alternate ease-in-out;
 }
 
-button.unblink {
-  animation: none;
-}
-
-@keyframes blinkAnime{
-  0%   { opacity: 0; } 
+@keyframes blink {
+  0%   { opacity: 1; } 
+  50%   { opacity: 0; } 
   100% { opacity: 1; }
 }
 

@@ -53,7 +53,7 @@ function updateTimerDisplay(secondsLeft) {
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
   document.getElementById('endButton').classList.remove('active');
-  document.getElementById('skipButton').classList.remove('blink');
+  document.getElementById('skipButton').classList.remove('redactive');
   document.getElementById('skipButton').disabled = true;
   // document.getElementById('pauseButton').classList.remove('enabled');
   // document.getElementById('pauseButton').classList.add('disabled');
@@ -92,8 +92,9 @@ function startTimer() {
     if (isPaused) {
       paused = Math.floor((Date.now() - pauseTimestamp) / 1000);
     } else {
-      elapsed_real = elapsed - paused;
-      remaining = Duration - elapsed_real + adjtime;
+      // elapsed_real = elapsed - paused;
+      // remaining = Duration - elapsed_real + adjtime;
+      remaining = Duration - elapsed
       updateTimerDisplay(Math.max(remaining, 0));
       // if (!last30sec && Duration > 60 && !keika_1min && elapsed_real >= 60) {
       //   keika_1min = true;
@@ -183,7 +184,7 @@ document.getElementById('startButton').addEventListener('click', () => {
 
 document.getElementById('skipButton').addEventListener('click', () => {
   skipped = true;
-  document.getElementById('skipButton').classList.add('blink');
+  document.getElementById('skipButton').classList.add('redactive');
   document.getElementById('skipButton').disabled = true;
 });
 
