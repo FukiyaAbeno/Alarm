@@ -128,7 +128,7 @@ function startTimer() {
 
       if (!finished && remaining <= 0) {
         finished = true;
-        document.getElementById('skipButton').add('red');
+        // document.getElementById('skipButton').add('red');
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
         audioFinish.play().catch(e => console.log("終了再生失敗", e));
