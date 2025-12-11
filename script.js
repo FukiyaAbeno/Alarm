@@ -4,16 +4,22 @@ let skipped = false;
 let startTimestamp = null;
 
 let Duration = 180;
-let AlartSec = 30;
+let AlartSec = 31;  // 1秒手前で警告音声をスタートさせる
 let remaining = Duration;
 
 let last30sec = false;
 let finished = false;
 
 let elapsed = 0;
+let elapsed_real = 0;
 let paused = 0;
+let adjtime = 0;
 let run_stat = "stop";
-let AlartTime = Duration - AlartSec;
+let keika_1min = false;
+let keika_2min = false;
+let keika_3min = false;
+let keika_4min = false;
+let keika_5min = false;
 
 // 事前にAudioを生成
 let audioStart = new Audio('audio/start.m4a');
@@ -69,9 +75,10 @@ function resetTimer() {
   pauseTimestamp = null;
   isPaused = false;
   elapsed = 0;
+  elapsed_real = 0;
   paused = 0;
+  adjtime = 0;
   run_stat = "stop";
-  AlartTime = Duration - AlartSec;
   updateTimerDisplay(Duration);
   resetButtonStates();
 }
@@ -82,15 +89,36 @@ function startTimer() {
   document.getElementById('skipButton').disabled = false;
   document.getElementById('pauseButton').disabled = false;
   paused = 0;
+  adjtime = 0;
   countdownInterval = setInterval(() => {
     elapsed = Math.floor((Date.now() - startTimestamp) / 1000);
-    // console.log("elapsed: ", elapsed, " paused: ", paused, "remain: ", remaining);
     if (isPaused) {
       paused = Math.floor((Date.now() - pauseTimestamp) / 1000);
     } else {
-      remaining = Duration - elapsed + paused;
+      elapsed_real = elapsed - paused;
+      remaining = Duration - elapsed_real + adjtime;
       updateTimerDisplay(Math.max(remaining, 0));
-      if (!last30sec && elapsed >= AlartTime) {
+      if (!last30sec && Duration > 60 && !keika_1min && elapsed_real >= 60) {
+        keika_1min = true;
+        audio1min.play().catche(e => console.log("1分経過音再生失敗"));
+      }
+      if (!last30sec && Duration > 120 && !keika_2min && elapsed_real >= 120) {
+        keika_2min = true;
+        audio2min.play().catche(e => console.log("2分経過音再生失敗"));
+      }
+      if (!last30sec && Duration > 180 && !keika_3min && elapsed_real >= 180) {
+        keika_3min = true;
+        audio3min.play().catche(e => console.log("3分経過音再生失敗"));
+      }
+      if (!last30sec && Duration > 240 && !keika_4min && elapsed_real >= 240) {
+        keika_4min = true;
+        audio4min.play().catche(e => console.log("4分経過音再生失敗"));
+      }
+      if (!last30sec && Duration > 300 && !keika_5min && elapsed_real >= 300) {
+        keika_5min = true;
+        audio5min.play().catche(e => console.log("5分経過音再生失敗"));
+      }
+      if (!last30sec && remaining <= AlartSec) {
         last30sec = true;
         audioLast30sec.play().catch(e => {
           console.log("30秒前再生失敗", e);
@@ -101,11 +129,10 @@ function startTimer() {
         });
       }
 
-      if (!finished && elapsed >= Duration) {
+      if (!finished && remaining <= 0) {
         finished = true;
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
-        // audio3min.play().catch(e => console.log("3分再生失敗", e));
         audioFinish.play().catch(e => console.log("終了再生失敗", e));
         setTimeout(() => {
           if (skipped) {
@@ -128,19 +155,19 @@ function resumeTimer() {
 }
 
 function adjtimer() {
-  prev_remain = Duration - elapsed + paused;
-  newtime = prompt('残り時間（秒数）を入力してください', remaining);
-  if (newtime === null) {
-    newtime = prev_remain;
-  } else if (newtime === "") {
-    newtime = prev_remain;
-  } else if (!isFinite(newtime)) {
-    newtime = prev_remain;
-  };
-  new_remain = newtime;
-  // diff_remain = new_remain - prev_remain;
-  Duration += (new_remain - prev_remain);
-  AlartTime = Duration - AlartSec;
+  console.log("adjtimer routine")
+  prev_remain = Duration - elapsed_real;
+  let new_remain = prompt('残り時間（秒数）を入力してください', prev_remain);
+  if (new_remain === null) {
+    new_remain = prev_remain;
+  } else if (new_remain === "") {
+    new_remain = prev_remain;
+  } else if (!isFinite(new_remain)) {
+    new_remain = prev_remain;
+  } else if (new_remain > 360) {
+    new_remain = prev_remain;
+  }
+  adjtime = new_remain - prev_remain;
   updateTimerDisplay(Math.max(new_remain, 0));
 }
 
@@ -190,8 +217,10 @@ document.getElementById('resumeButton').addEventListener('click', () => {
 document.getElementById('adjtimeButton').addEventListener('click', () => {
   pauseTimer();
   adjtimer();
-  if (run_stat === "stop") {
+  if (run_stat === "start") {
     document.getElementById('pauseButton').disabled = true;
     document.getElementById('pauseButton').classList.remove('enabled');
+    document.getElementById('resumeButton').disabled = false;
+    document.getElementById('resumeButton').classList.add('enabled');
   }
 });
