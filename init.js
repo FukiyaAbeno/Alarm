@@ -1,5 +1,5 @@
 window.onload = function() {
-    const myregex = new RegExp('/Alarm/entry\.html$');
+    const myregex = new RegExp('/entry\.html$');
     var ref = document.referrer;
     var result = ref.match(myregex)
     if(!result) {

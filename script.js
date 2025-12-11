@@ -4,7 +4,7 @@ let skipped = false;
 let startTimestamp = null;
 
 let Duration = 180;
-let AlartSec = Duration - 30;
+let AlartSec = 30;
 let remaining = Duration;
 
 let played30 = false;
@@ -13,19 +13,28 @@ let played3min = false;
 let elapsed = 0;
 let paused = 0;
 let run_stat = "stop";
+let AlartTime = Duration - AlartSec;
 
 // 事前にAudioを生成
 let audioStart = new Audio('audio/start.m4a');
-let audio2min30 = new Audio('audio/2min30sec.m4a');
-let audio3min = new Audio('audio/3min.m4a');
-let audio3minHaneya = new Audio('audio/3min_haneya.m4a');
+let audio1min = new Audio('audio/1min_keika.m4a');
+let audio2min = new Audio('audio/2min_keika.m4a');
+let audio3min = new Audio('audio/3min_keika.m4a');
+let audio4min = new Audio('audio/4min_keika.m4a');
+let audio5min = new Audio('audio/5min_keika.m4a');
+let audioLast30sec = new Audio('audio/remain30sec.m4a');
+let audioHaneya = new Audio('audio/haneya.m4a');
 let audioFinish = new Audio('audio/finish.m4a');
 
 function preloadAudios() {
   audioStart.load();
-  audio2min30.load();
+  audioLast30sec.load();
+  audio1min.load();
+  audio2min.load();
   audio3min.load();
-  audio3minHaneya.load();
+  audio4min.load();
+  audio5min.load();
+  audioHaneya.load();
   audioFinish.load();
 }
 
@@ -58,6 +67,7 @@ function resetTimer() {
   elapsed = 0;
   paused = 0;
   run_stat = "stop";
+  AlartTime = Duration - AlartSec;
   updateTimerDisplay(Duration);
   resetButtonStates();
 }
@@ -76,8 +86,8 @@ function startTimer() {
     } else {
       remaining = Duration - elapsed + paused;
       updateTimerDisplay(Math.max(remaining, 0));
-      if (!played30 && elapsed >= AlartSec) {
-        audio2min30.play().catch(e => {
+      if (!played30 && elapsed >= AlartTime) {
+        audioLast30sec.play().catch(e => {
           console.log("30秒前再生失敗", e);
           const debugEl = document.getElementById("debug");
           if (debugEl) {
@@ -91,13 +101,13 @@ function startTimer() {
         played3min = true;
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
-        if (skipped) {
-          audio3minHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
-        } else {
-          audio3min.play().catch(e => console.log("3分再生失敗", e));
-          setTimeout(() => {
-            audioFinish.play().catch(e => console.log("終了再生失敗", e));
-            resetTimer();
+        audio3min.play().catch(e => console.log("3分再生失敗", e));
+        setTimeout(() => {
+          audioFinish.play().catch(e => console.log("終了再生失敗", e));
+          if (skipped) {
+            audioHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
+          }
+          resetTimer();
           }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
         }
       }
@@ -108,20 +118,26 @@ function startTimer() {
 function pauseTimer() {
   isPaused = true;
   pauseTimestamp = Date.now();
-  document.getElementById('pauseButton').textContent = '一時停止中'
-  document.getElementById('pauseButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('enabled');
-  document.getElementById('resumeButton').disabled = false;
-  document.getElementById('resumeButton').classList.add('enabled');
 }
 
 function resumeTimer() {
   isPaused = false;
-  document.getElementById('pauseButton').textContent = '一時停止'
-  document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.remove('enabled');
+}
+
+function adjtimer() {
+  prev_remain = Duration - elapsed + paused;
+  newtime = prompt('残り時間（秒数）を入力してください', remaining);
+  if (newtime === null) {
+    newtime = prev_remain;
+  } else if (newtime === "") {
+    newtime = prev_remain;
+  } else if (!isFinite(newtime)) {
+    newtime = prev_remain;
+  };
+  new_remain = newtime;
+  diff_remain = new_remain - prev_remain;
+  Duration += diff_remain;
+  updateTimerDisplay(Math.max(new_remain, 0));
 }
 
 document.getElementById('startButton').addEventListener('click', () => {
@@ -151,27 +167,25 @@ document.getElementById('endButton').addEventListener('click', () => {
 
 document.getElementById('pauseButton').addEventListener('click', () => {
   pauseTimer();
+  document.getElementById('pauseButton').textContent = '一時停止中'
+  document.getElementById('pauseButton').disabled = true;
+  document.getElementById('pauseButton').classList.remove('enabled');
+  document.getElementById('resumeButton').disabled = false;
+  document.getElementById('resumeButton').classList.add('enabled');
 });
 
 document.getElementById('resumeButton').addEventListener('click', () => {
   resumeTimer();
+  document.getElementById('pauseButton').textContent = '一時停止'
+  document.getElementById('pauseButton').disabled = false;
+  document.getElementById('pauseButton').classList.add('enabled');
+  document.getElementById('resumeButton').disabled = true;
+  document.getElementById('resumeButton').classList.remove('enabled');
 });
 
 document.getElementById('adjtimeButton').addEventListener('click', () => {
   pauseTimer();
-  prev_remain = Duration - elapsed + paused;
-  newtime = prompt('残り時間（秒数）を入力してください', remaining);
-  if (newtime === null) {
-    newtime = prev_remain;
-  } else if (newtime === "") {
-    newtime = prev_remain;
-  } else if (!isFinite(newtime)) {
-    newtime = prev_remain;
-  };
-  new_remain = newtime;
-  diff_remain = new_remain - prev_remain;
-  Duration += diff_remain;
-  updateTimerDisplay(Math.max(new_remain, 0));
+  adjtimer();
   if (run_stat === "stop") {
     document.getElementById('pauseButton').disabled = true;
     document.getElementById('pauseButton').classList.remove('enabled');
