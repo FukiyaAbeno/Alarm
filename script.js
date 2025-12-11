@@ -155,7 +155,6 @@ function resumeTimer() {
 }
 
 function adjtimer() {
-  console.log("adjtimer routine")
   prev_remain = Duration - elapsed_real;
   let new_remain = prompt('残り時間（秒数）を入力してください', prev_remain);
   if (new_remain === null) {
