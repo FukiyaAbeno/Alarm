@@ -14,38 +14,34 @@ let elapsed = 0;
 let elapsed_real = 0;
 let paused = 0;
 let adjtime = 0;
-let run_stat = "stop";
-let keika_1min = false;
-let keika_2min = false;
-let keika_3min = false;
-let keika_4min = false;
-let keika_5min = false;
+// let run_stat = "stop";
+// let keika_1min = false;
+// let keika_2min = false;
+// let keika_3min = false;
+// let keika_4min = false;
+// let keika_5min = false;
 
 // 事前にAudioを生成
 let audioStart = new Audio('audio/start.m4a');
-let audio1min = new Audio('audio/1min_keika.m4a');
-let audio2min = new Audio('audio/2min_keika.m4a');
-let audio3min = new Audio('audio/3min_keika.m4a');
-let audio4min = new Audio('audio/4min_keika.m4a');
-let audio5min = new Audio('audio/5min_keika.m4a');
 let audioLast30sec = new Audio('audio/remain30sec.m4a');
 let audioHaneya = new Audio('audio/haneya.m4a');
 let audioFinish = new Audio('audio/finish.m4a');
-
-function wait(msec) {
-  return new Promise(resolve => setTimeout(resolve, msec));
-}
+// let audio1min = new Audio('audio/1min_keika.m4a');
+// let audio2min = new Audio('audio/2min_keika.m4a');
+// let audio3min = new Audio('audio/3min_keika.m4a');
+// let audio4min = new Audio('audio/4min_keika.m4a');
+// let audio5min = new Audio('audio/5min_keika.m4a');
 
 function preloadAudios() {
   audioStart.load();
   audioLast30sec.load();
-  audio1min.load();
-  audio2min.load();
-  audio3min.load();
-  audio4min.load();
-  audio5min.load();
   audioHaneya.load();
   audioFinish.load();
+  // audio1min.load();
+  // audio2min.load();
+  // audio3min.load();
+  // audio4min.load();
+  // audio5min.load();
 }
 
 function updateTimerDisplay(secondsLeft) {
@@ -79,7 +75,7 @@ function resetTimer() {
   elapsed_real = 0;
   paused = 0;
   adjtime = 0;
-  run_stat = "stop";
+  // run_stat = "stop";
   updateTimerDisplay(Duration);
   resetButtonStates();
 }
@@ -147,30 +143,30 @@ function startTimer() {
   }, 500);
 }
 
-function pauseTimer() {
-  isPaused = true;
-  pauseTimestamp = Date.now();
-}
+// function pauseTimer() {
+//   isPaused = true;
+//   pauseTimestamp = Date.now();
+// }
 
-function resumeTimer() {
-  isPaused = false;
-}
+// function resumeTimer() {
+//   isPaused = false;
+// }
 
-function adjtimer() {
-  prev_remain = Duration - elapsed_real;
-  let new_remain = prompt('残り時間（秒数）を入力してください', prev_remain);
-  if (new_remain === null) {
-    new_remain = prev_remain;
-  } else if (new_remain === "") {
-    new_remain = prev_remain;
-  } else if (!isFinite(new_remain)) {
-    new_remain = prev_remain;
-  } else if (new_remain > 360) {
-    new_remain = prev_remain;
-  }
-  adjtime = new_remain - prev_remain;
-  updateTimerDisplay(Math.max(new_remain, 0));
-}
+// function adjtimer() {
+//   prev_remain = Duration - elapsed_real;
+//   let new_remain = prompt('残り時間（秒数）を入力してください', prev_remain);
+//   if (new_remain === null) {
+//     new_remain = prev_remain;
+//   } else if (new_remain === "") {
+//     new_remain = prev_remain;
+//   } else if (!isFinite(new_remain)) {
+//     new_remain = prev_remain;
+//   } else if (new_remain > 360) {
+//     new_remain = prev_remain;
+//   }
+//   adjtime = new_remain - prev_remain;
+//   updateTimerDisplay(Math.max(new_remain, 0));
+// }
 
 document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
@@ -180,7 +176,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   // document.getElementById('pauseButton').disabled = false;
   audioStart.play().catch(e => console.log("開始再生失敗", e));
   setTimeout(() => {
-    run_stat = "start";
+    // run_stat = "start";
     startTimer();
   }, 4000);
 });
