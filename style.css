@@ -30,12 +30,12 @@ h1 {
 }
 
 button {
-  width: 100px;
-  height: 90px;
+  width: 150px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4em;
+  font-size: 1.6em;
   padding: 0;
   box-sizing: border-box;
   border: none;
@@ -91,6 +91,8 @@ button.yellow {
 
 button.red {
   background-color: #e53935;
+  width: 302px;
+  animation: none;
 }
 
 button.black {
@@ -104,6 +106,19 @@ button.active {
 
 button.enabled {
   background-color: #3f4add;
+}
+
+button.blink {
+  animation: blinkAnime 1s infinite alternate;
+}
+
+button.unblink {
+  animation: none;
+}
+
+@keyframes blinkAnime{
+  0%   { opacity: 0; } 
+  100% { opacity: 1; }
 }
 
 footer {

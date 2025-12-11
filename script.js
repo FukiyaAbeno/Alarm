@@ -56,14 +56,15 @@ function updateTimerDisplay(secondsLeft) {
 
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
-  document.getElementById('skipButton').classList.remove('active');
+  document.getElementById('endButton').classList.remove('active');
+  document.getElementById('skipButton').classList.remove('blink');
   document.getElementById('skipButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('enabled');
-  document.getElementById('pauseButton').classList.add('disabled');
-  document.getElementById('pauseButton').disabled = true;
-  document.getElementById('resumeButton').classList.remove('enabled');
-  document.getElementById('resumeButton').classList.add('disabled');
-  document.getElementById('resumeButton').disabled = true;
+  // document.getElementById('pauseButton').classList.remove('enabled');
+  // document.getElementById('pauseButton').classList.add('disabled');
+  // document.getElementById('pauseButton').disabled = true;
+  // document.getElementById('resumeButton').classList.remove('enabled');
+  // document.getElementById('resumeButton').classList.add('disabled');
+  // document.getElementById('resumeButton').disabled = true;
 }
 
 function resetTimer() {
@@ -87,7 +88,7 @@ function startTimer() {
   startTimestamp = Date.now();
   pauseTimestamp = Date.now();
   document.getElementById('skipButton').disabled = false;
-  document.getElementById('pauseButton').disabled = false;
+  // document.getElementById('pauseButton').disabled = false;
   paused = 0;
   adjtime = 0;
   countdownInterval = setInterval(() => {
@@ -98,26 +99,26 @@ function startTimer() {
       elapsed_real = elapsed - paused;
       remaining = Duration - elapsed_real + adjtime;
       updateTimerDisplay(Math.max(remaining, 0));
-      if (!last30sec && Duration > 60 && !keika_1min && elapsed_real >= 60) {
-        keika_1min = true;
-        audio1min.play().catche(e => console.log("1分経過音再生失敗"));
-      }
-      if (!last30sec && Duration > 120 && !keika_2min && elapsed_real >= 120) {
-        keika_2min = true;
-        audio2min.play().catche(e => console.log("2分経過音再生失敗"));
-      }
-      if (!last30sec && Duration > 180 && !keika_3min && elapsed_real >= 180) {
-        keika_3min = true;
-        audio3min.play().catche(e => console.log("3分経過音再生失敗"));
-      }
-      if (!last30sec && Duration > 240 && !keika_4min && elapsed_real >= 240) {
-        keika_4min = true;
-        audio4min.play().catche(e => console.log("4分経過音再生失敗"));
-      }
-      if (!last30sec && Duration > 300 && !keika_5min && elapsed_real >= 300) {
-        keika_5min = true;
-        audio5min.play().catche(e => console.log("5分経過音再生失敗"));
-      }
+      // if (!last30sec && Duration > 60 && !keika_1min && elapsed_real >= 60) {
+      //   keika_1min = true;
+      //   audio1min.play().catche(e => console.log("1分経過音再生失敗"));
+      // }
+      // if (!last30sec && Duration > 120 && !keika_2min && elapsed_real >= 120) {
+      //   keika_2min = true;
+      //   audio2min.play().catche(e => console.log("2分経過音再生失敗"));
+      // }
+      // if (!last30sec && Duration > 180 && !keika_3min && elapsed_real >= 180) {
+      //   keika_3min = true;
+      //   audio3min.play().catche(e => console.log("3分経過音再生失敗"));
+      // }
+      // if (!last30sec && Duration > 240 && !keika_4min && elapsed_real >= 240) {
+      //   keika_4min = true;
+      //   audio4min.play().catche(e => console.log("4分経過音再生失敗"));
+      // }
+      // if (!last30sec && Duration > 300 && !keika_5min && elapsed_real >= 300) {
+      //   keika_5min = true;
+      //   audio5min.play().catche(e => console.log("5分経過音再生失敗"));
+      // }
       if (!last30sec && remaining <= AlartSec) {
         last30sec = true;
         audioLast30sec.play().catch(e => {
@@ -131,6 +132,7 @@ function startTimer() {
 
       if (!finished && remaining <= 0) {
         finished = true;
+        document.getElementById('skipButton').add('red');
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
         audioFinish.play().catch(e => console.log("終了再生失敗", e));
@@ -174,8 +176,8 @@ document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('pauseButton').disabled = false;
+  // document.getElementById('pauseButton').classList.add('enabled');
+  // document.getElementById('pauseButton').disabled = false;
   audioStart.play().catch(e => console.log("開始再生失敗", e));
   setTimeout(() => {
     run_stat = "start";
@@ -185,7 +187,7 @@ document.getElementById('startButton').addEventListener('click', () => {
 
 document.getElementById('skipButton').addEventListener('click', () => {
   skipped = true;
-  document.getElementById('skipButton').classList.add('active');
+  document.getElementById('skipButton').classList.add('blink');
   document.getElementById('skipButton').disabled = true;
 });
 
@@ -195,31 +197,31 @@ document.getElementById('endButton').addEventListener('click', () => {
   run_stat = "stop";
 });
 
-document.getElementById('pauseButton').addEventListener('click', () => {
-  pauseTimer();
-  document.getElementById('pauseButton').textContent = '一時停止中'
-  document.getElementById('pauseButton').disabled = true;
-  document.getElementById('pauseButton').classList.remove('enabled');
-  document.getElementById('resumeButton').disabled = false;
-  document.getElementById('resumeButton').classList.add('enabled');
-});
+// document.getElementById('pauseButton').addEventListener('click', () => {
+//   pauseTimer();
+//   document.getElementById('pauseButton').textContent = '一時停止中'
+//   document.getElementById('pauseButton').disabled = true;
+//   document.getElementById('pauseButton').classList.remove('enabled');
+//   document.getElementById('resumeButton').disabled = false;
+//   document.getElementById('resumeButton').classList.add('enabled');
+// });
 
-document.getElementById('resumeButton').addEventListener('click', () => {
-  resumeTimer();
-  document.getElementById('pauseButton').textContent = '一時停止'
-  document.getElementById('pauseButton').disabled = false;
-  document.getElementById('pauseButton').classList.add('enabled');
-  document.getElementById('resumeButton').disabled = true;
-  document.getElementById('resumeButton').classList.remove('enabled');
-});
+// document.getElementById('resumeButton').addEventListener('click', () => {
+//   resumeTimer();
+//   document.getElementById('pauseButton').textContent = '一時停止'
+//   document.getElementById('pauseButton').disabled = false;
+//   document.getElementById('pauseButton').classList.add('enabled');
+//   document.getElementById('resumeButton').disabled = true;
+//   document.getElementById('resumeButton').classList.remove('enabled');
+// });
 
-document.getElementById('adjtimeButton').addEventListener('click', () => {
-  pauseTimer();
-  adjtimer();
-  if (run_stat === "start") {
-    document.getElementById('pauseButton').disabled = true;
-    document.getElementById('pauseButton').classList.remove('enabled');
-    document.getElementById('resumeButton').disabled = false;
-    document.getElementById('resumeButton').classList.add('enabled');
-  }
-});
+// document.getElementById('adjtimeButton').addEventListener('click', () => {
+//   pauseTimer();
+//   adjtimer();
+//   if (run_stat === "start") {
+//     document.getElementById('pauseButton').disabled = true;
+//     document.getElementById('pauseButton').classList.remove('enabled');
+//     document.getElementById('resumeButton').disabled = false;
+//     document.getElementById('resumeButton').classList.add('enabled');
+//   }
+// });
