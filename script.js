@@ -7,8 +7,8 @@ let Duration = 180;
 let AlartSec = 30;
 let remaining = Duration;
 
-let played30 = false;
-let played3min = false;
+let last30sec = false;
+let finished = false;
 
 let elapsed = 0;
 let paused = 0;
@@ -25,6 +25,10 @@ let audio5min = new Audio('audio/5min_keika.m4a');
 let audioLast30sec = new Audio('audio/remain30sec.m4a');
 let audioHaneya = new Audio('audio/haneya.m4a');
 let audioFinish = new Audio('audio/finish.m4a');
+
+function wait(msec) {
+  return new Promise(resolve => setTimeout(resolve, msec));
+}
 
 function preloadAudios() {
   audioStart.load();
@@ -60,8 +64,8 @@ function resetTimer() {
   clearInterval(countdownInterval);
   skipped = false;
   startTimestamp = null;
-  played30 = false;
-  played3min = false;
+  last30sec = false;
+  finished = false;
   pauseTimestamp = null;
   isPaused = false;
   elapsed = 0;
@@ -86,7 +90,8 @@ function startTimer() {
     } else {
       remaining = Duration - elapsed + paused;
       updateTimerDisplay(Math.max(remaining, 0));
-      if (!played30 && elapsed >= AlartTime) {
+      if (!last30sec && elapsed >= AlartTime) {
+        last30sec = true;
         audioLast30sec.play().catch(e => {
           console.log("30秒前再生失敗", e);
           const debugEl = document.getElementById("debug");
@@ -94,22 +99,20 @@ function startTimer() {
             debugEl.textContent = "30秒前エラー: " + e.message;
           }
         });
-        played30 = true;
       }
 
-      if (!played3min && elapsed >= Duration) {
-        played3min = true;
+      if (!finished && elapsed >= Duration) {
+        finished = true;
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
-        audio3min.play().catch(e => console.log("3分再生失敗", e));
+        // audio3min.play().catch(e => console.log("3分再生失敗", e));
+        audioFinish.play().catch(e => console.log("終了再生失敗", e));
         setTimeout(() => {
-          audioFinish.play().catch(e => console.log("終了再生失敗", e));
           if (skipped) {
             audioHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
           }
           resetTimer();
           }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
-        }
       }
     }
   }, 500);
@@ -135,8 +138,9 @@ function adjtimer() {
     newtime = prev_remain;
   };
   new_remain = newtime;
-  diff_remain = new_remain - prev_remain;
-  Duration += diff_remain;
+  // diff_remain = new_remain - prev_remain;
+  Duration += (new_remain - prev_remain);
+  AlartTime = Duration - AlartSec;
   updateTimerDisplay(Math.max(new_remain, 0));
 }
 
