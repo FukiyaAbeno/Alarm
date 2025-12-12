@@ -141,7 +141,7 @@ function startTimer() {
           if (skipped) {
             audioHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
           } else {
-            audioFinished.play().catch(e => console.log("終了再生失敗", e));
+            audioFinish.play().catch(e => console.log("終了再生失敗", e));
             resetTimer();
           }
         }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
