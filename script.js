@@ -180,9 +180,9 @@ document.getElementById('startButton').addEventListener('click', () => {
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
   document.getElementById('startButton').disabled = true;
-  document.getElementById('endButton').classList.add('black');
+  document.getElementById('endButton').classList.add('navy');
   document.getElementById('endButton').disabled = false;
-  document.getElementById('skipButton').classList.add('black');
+  document.getElementById('skipButton').classList.add('grey');
   document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').classList.add('enabled');
   // document.getElementById('pauseButton').disabled = false;
