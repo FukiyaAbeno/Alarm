@@ -182,7 +182,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   document.getElementById('startButton').disabled = true;
   document.getElementById('endButton').classList.add('navy');
   document.getElementById('endButton').disabled = false;
-  document.getElementById('skipButton').classList.add('grey');
+  document.getElementById('skipButton').classList.add('black');
   document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').classList.add('enabled');
   // document.getElementById('pauseButton').disabled = false;
@@ -194,7 +194,7 @@ document.getElementById('startButton').addEventListener('click', () => {
 });
 
 document.getElementById('endButton').addEventListener('click', () => {
-  document.getElementById('endButton').classList.remove('black');
+  document.getElementById('endButton').classList.remove('navy');
   if (skipped) {
     document.getElementById('skipButton').classList.remove('red');
   }
