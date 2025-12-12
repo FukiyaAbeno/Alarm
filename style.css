@@ -62,7 +62,8 @@ a:hover {
 button.agree {
   background-color: black;
   color: white;
-  height: 100px;
+  height: 110px;
+  font-size: 3em;
 }
 
 button.yellow {
