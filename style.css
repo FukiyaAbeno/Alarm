@@ -44,10 +44,25 @@ button {
   line-height: 1;
 }
 
+a:link {
+  color: grey;
+  text-decoration: none;
+}
+
+a:visited {
+  color: grey;
+  text-decoration: none;
+}
+
+a:hover {
+  color: grey;
+  text-decoration: underline;
+}
+
 button.agree {
-  background-color: green;
+  background-color: black;
   color: white;
-  height: 60px;
+  height: 100px;
 }
 
 button.yellow {
@@ -90,6 +105,11 @@ button.red {
   color: white;
 }
 
+button.aqua {
+  background-color: aqua;
+  color: white;
+}
+
 button.blue {
   background-color: blue;
   color: white;
@@ -97,6 +117,16 @@ button.blue {
 
 button.navy {
   background-color: navy;
+  color: white;
+}
+
+button.olive {
+  background-color: olive;
+  color: white;
+}
+
+button.maroon {
+  background-color: maroon;
   color: white;
 }
 
