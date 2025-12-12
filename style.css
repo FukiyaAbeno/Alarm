@@ -45,24 +45,24 @@ button {
 }
 
 a:link {
-  color: grey;
+  color: white;
   text-decoration: none;
 }
 
 a:visited {
-  color: grey;
+  color: white;
   text-decoration: none;
 }
 
 a:hover {
-  color: grey;
+  color: white;
   text-decoration: underline;
 }
 
 button.agree {
   background-color: black;
   color: white;
-  height: 110px;
+  height: 10px;
   font-size: 3em;
 }
 
