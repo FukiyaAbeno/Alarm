@@ -86,8 +86,6 @@ function resetTimer() {
 function startTimer() {
   startTimestamp = Date.now();
   pauseTimestamp = Date.now();
-  document.getElementById('endButton').disabled = false;
-  document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').disabled = false;
   paused = 0;
   adjtime = 0;
@@ -180,6 +178,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
   document.getElementById('startButton').disabled = true;
+  document.getElementById('endButton').classList.add('black');
   document.getElementById('endButton').disabled = false;
   document.getElementById('skipButton').classList.add('grey');
   document.getElementById('skipButton').disabled = false;
@@ -193,7 +192,11 @@ document.getElementById('startButton').addEventListener('click', () => {
 });
 
 document.getElementById('endButton').addEventListener('click', () => {
+  document.getElementById('endButton').classList.remove('black');
   document.getElementById('endButton').disabled = true;
+  // if (skipped) {
+  //   document.getElementById('skipButton').classList.remove('red');
+  // }
   document.getElementById('skipButton').classList.remove('grey');
   document.getElementById('skipButton').disabled = true;
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
@@ -203,7 +206,7 @@ document.getElementById('endButton').addEventListener('click', () => {
 
 document.getElementById('skipButton').addEventListener('click', () => {
   skipped = true;
-  document.getElementById('skipButton').classList.remove('grey');
+  // document.getElementById('skipButton').classList.add('red');
   document.getElementById('skipButton').disabled = true;
 });
 
