@@ -60,6 +60,11 @@ button.green {
   color: white;
 }
 
+button.silver {
+  background-color: silver;
+  color: white;
+}
+
 button.grey {
   background-color: grey;
   color: white;
@@ -77,6 +82,16 @@ button.white {
 
 button.red {
   background-color: red;
+  color: white;
+}
+
+button.blue {
+  background-color: blue;
+  color: white;
+}
+
+button.navy {
+  background-color: navy;
   color: white;
 }
 
