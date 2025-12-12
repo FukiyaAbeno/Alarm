@@ -180,7 +180,7 @@ document.getElementById('startButton').addEventListener('click', () => {
   document.getElementById('startButton').disabled = true;
   document.getElementById('endButton').classList.add('black');
   document.getElementById('endButton').disabled = false;
-  document.getElementById('skipButton').classList.add('grey');
+  // document.getElementById('skipButton').classList.add('grey');
   document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').classList.add('enabled');
   // document.getElementById('pauseButton').disabled = false;
@@ -192,12 +192,12 @@ document.getElementById('startButton').addEventListener('click', () => {
 });
 
 document.getElementById('endButton').addEventListener('click', () => {
-  document.getElementById('endButton').classList.remove('black');
+  // document.getElementById('endButton').classList.remove('black');
   document.getElementById('endButton').disabled = true;
   // if (skipped) {
   //   document.getElementById('skipButton').classList.remove('red');
   // }
-  document.getElementById('skipButton').classList.remove('grey');
+  document.getElementById('skipButton').classList.remove('active');
   document.getElementById('skipButton').disabled = true;
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
@@ -207,6 +207,7 @@ document.getElementById('endButton').addEventListener('click', () => {
 document.getElementById('skipButton').addEventListener('click', () => {
   skipped = true;
   // document.getElementById('skipButton').classList.add('red');
+  document.getElementById('skipButton').classList.add('active');
   document.getElementById('skipButton').disabled = true;
 });
 
