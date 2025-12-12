@@ -75,29 +75,9 @@ button.green {
   color: white;
 }
 
-button.lime {
-  background-color: lime;
-  color: white;
-}
-
-button.silver {
-  background-color: silver;
-  color: white;
-}
-
-button.grey {
-  background-color: grey;
-  color: white;
-}
-
 button.black {
   background-color: black;
   color: white;
-}
-
-button.white {
-  background-color: white;
-  color: grey;
 }
 
 button.red {
@@ -105,28 +85,8 @@ button.red {
   color: white;
 }
 
-button.aqua {
-  background-color: aqua;
-  color: white;
-}
-
-button.blue {
-  background-color: blue;
-  color: white;
-}
-
-button.navy {
-  background-color: navy;
-  color: white;
-}
-
 button.olive {
-  background-color: olive;
-  color: white;
-}
-
-button.maroon {
-  background-color: maroon;
+  background-color: #838383;
   color: white;
 }
 
