@@ -45,6 +45,63 @@ button {
   line-height: 1;
 }
 
+button.agree {
+  background-color: green;
+  height: 60px;
+}
+
+button.yellow {
+  background-color: #fdd835;
+  color: black;
+}
+
+button.green {
+  background-color: green;
+  color: white;
+}
+
+button.grey {
+  background-color: grey;
+  color: white;
+}
+
+button.black {
+  background-color: black;
+  color: white;
+}
+
+button.white {
+  background-color: white;
+  color: grey;
+}
+
+button.red {
+  background-color: red;
+  color: white;
+}
+
+button.active {
+  outline: 3px solid #2196f3;
+  box-shadow: 0 0 5px #2196f3;
+}
+
+button.wide {
+  /* background-color: grey;
+  color: white; */
+  width: 306px;
+  height: 100px;
+}
+
+button.blink {
+  animation:blink 3s infinite alternate ease-in-out;
+}
+
+@keyframes blink {
+  0%   { opacity: 1; } 
+  50%   { opacity: 0; } 
+  100% { opacity: 1; }
+}
+
 /* button.pause {
   width: 153px;
   height: 60px;
@@ -79,48 +136,9 @@ button {
   line-height: 1;
 } */
 
-button.agree {
-  background-color: #3fdd3f;
-  height: 60px;
-}
-
-button.yellow {
-  background-color: #fdd835;
-  color: black;
-}
-
-button.red {
-  background-color: #ff7b78;
-  width: 306px;
-  animation: none;
-}
-button.redactive {
-  background-color: #f70400;
-}
-
-
-button.black {
-  background-color: #424242;
-}
-
-button.active {
-  outline: 3px solid #2196f3;
-  box-shadow: 0 0 5px #2196f3;
-}
-
-button.enabled {
+/* button.enabled {
   background-color: #3f4add;
-}
-
-button.blink {
-  animation:blink 3s infinite alternate ease-in-out;
-}
-
-@keyframes blink {
-  0%   { opacity: 1; } 
-  50%   { opacity: 0; } 
-  100% { opacity: 1; }
-}
+} */
 
 footer {
   margin-top: 1.5em;

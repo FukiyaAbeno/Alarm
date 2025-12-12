@@ -1,3 +1,6 @@
+window.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('skipButton').classList.add('wide');
+});
 
 let countdownInterval;
 let skipped = false;
@@ -26,6 +29,7 @@ let audioStart = new Audio('audio/start.m4a');
 let audioLast30sec = new Audio('audio/remain30sec.m4a');
 let audioHaneya = new Audio('audio/haneya.m4a');
 let audioFinish = new Audio('audio/finish.m4a');
+let audio3min = new Audio('audio/3min.m4a');
 // let audio1min = new Audio('audio/1min_keika.m4a');
 // let audio2min = new Audio('audio/2min_keika.m4a');
 // let audio3min = new Audio('audio/3min_keika.m4a');
@@ -37,6 +41,7 @@ function preloadAudios() {
   audioLast30sec.load();
   audioHaneya.load();
   audioFinish.load();
+  audio3min.load();
   // audio1min.load();
   // audio2min.load();
   // audio3min.load();
@@ -52,9 +57,7 @@ function updateTimerDisplay(secondsLeft) {
 
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
-  document.getElementById('endButton').classList.remove('active');
-  document.getElementById('skipButton').classList.remove('redactive');
-  document.getElementById('skipButton').disabled = true;
+  document.getElementById('startButton').disabled = false;
   // document.getElementById('pauseButton').classList.remove('enabled');
   // document.getElementById('pauseButton').classList.add('disabled');
   // document.getElementById('pauseButton').disabled = true;
@@ -83,6 +86,7 @@ function resetTimer() {
 function startTimer() {
   startTimestamp = Date.now();
   pauseTimestamp = Date.now();
+  document.getElementById('endButton').disabled = false;
   document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').disabled = false;
   paused = 0;
@@ -132,13 +136,15 @@ function startTimer() {
         // document.getElementById('skipButton').add('red');
         document.getElementById('skipButton').disabled = true;
         clearInterval(countdownInterval);
-        audioFinish.play().catch(e => console.log("終了再生失敗", e));
+        audio3min.play().catch(e => console.log("3分経過再生失敗", e));
         setTimeout(() => {
           if (skipped) {
             audioHaneya.play().catch(e => console.log("3分(跳ね矢)再生失敗", e));
+          } else {
+            audioFinished.play().catch(e => console.log("終了再生失敗", e));
+            resetTimer();
           }
-          resetTimer();
-          }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
+        }, 3000); // 3秒待ってから終了音とリセット（音声長に合わせて調整）
       }
     }
   }, 500);
@@ -173,6 +179,11 @@ document.getElementById('startButton').addEventListener('click', () => {
   resetTimer();
   preloadAudios();
   document.getElementById('startButton').classList.add('active');
+  document.getElementById('startButton').disabled = true;
+  document.getElementById('endButton').classList.add('black');
+  document.getElementById('endButton').disabled = false;
+  document.getElementById('skipButton').classList.add('black');
+  document.getElementById('skipButton').disabled = false;
   // document.getElementById('pauseButton').classList.add('enabled');
   // document.getElementById('pauseButton').disabled = false;
   audioStart.play().catch(e => console.log("開始再生失敗", e));
@@ -182,16 +193,25 @@ document.getElementById('startButton').addEventListener('click', () => {
   }, 4000);
 });
 
-document.getElementById('skipButton').addEventListener('click', () => {
-  skipped = true;
-  document.getElementById('skipButton').classList.add('redactive');
-  document.getElementById('skipButton').disabled = true;
-});
-
 document.getElementById('endButton').addEventListener('click', () => {
+  document.getElementById('endButton').classList.remove('black');
+  if (skipped) {
+    document.getElementById('skipButton').classList.remove('red');
+  }
+  document.getElementById('skipButton').classList.remove('black');
+  // document.getElementById('skipButton').textContent = '跳ね矢';
+  document.getElementById('endButton').disabled = true;
+  document.getElementById('skipButton').disabled = true;
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
   run_stat = "stop";
+});
+
+document.getElementById('skipButton').addEventListener('click', () => {
+  skipped = true;
+  // document.getElementById('skipButton').textContent = '跳ね矢あり';
+  document.getElementById('skipButton').classList.add('red');
+  document.getElementById('skipButton').disabled = true;
 });
 
 // document.getElementById('pauseButton').addEventListener('click', () => {
