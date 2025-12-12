@@ -58,6 +58,9 @@ function updateTimerDisplay(secondsLeft) {
 function resetButtonStates() {
   document.getElementById('startButton').classList.remove('active');
   document.getElementById('startButton').disabled = false;
+  document.getElementById('endButton').disabled = true;
+  document.getElementById('skipButton').classList.remove('olive');
+  document.getElementById('skipButton').disabled = true;
   // document.getElementById('pauseButton').classList.remove('enabled');
   // document.getElementById('pauseButton').classList.add('disabled');
   // document.getElementById('pauseButton').disabled = true;
