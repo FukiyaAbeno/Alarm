@@ -194,9 +194,7 @@ document.getElementById('startButton').addEventListener('click', () => {
 
 document.getElementById('endButton').addEventListener('click', () => {
   document.getElementById('endButton').disabled = true;
-  if (!skipped) {
-    document.getElementById('skipButton').classList.remove('grey');
-  }
+  document.getElementById('skipButton').classList.remove('grey');
   document.getElementById('skipButton').disabled = true;
   audioFinish.play().catch(e => console.log("終了再生失敗", e));
   resetTimer();
