@@ -4,7 +4,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
 let countdownInterval;
 let Duration = 180;
-let AlartSec = 31;  // 1秒手前から警告音声をスタートさせる
+let AlartSec = 31;  // 1秒手前から「３０秒前です」音声をスタートさせる
 let startTimestamp = null;
 let remaining = Duration;
 let elapsed = 0;
