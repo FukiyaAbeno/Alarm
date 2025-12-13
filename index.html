@@ -4,10 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>吹矢アラームちゃん</title>
-  <link rel="stylesheet" href="style.css" />
+  <!-- <link rel="stylesheet" href="style.css" /> -->
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" type="image/png" href="icon-512.png">
   <meta name="theme-color" content="#e53935">
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 1em;
+      background: #fff8e1;
+    }
+
+    h1 {
+      font-size: 1.6em;
+      margin-bottom: 0.2em;
+    }
+
+    .button-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 0.5em;
+      margin-top: 1em;
+    }
+    button {
+      width: 150px;
+      height: 110px;
+      color: white;
+      background-color: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3em;
+      padding: 0;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    a:link {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: white;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <h1>吹矢アラームちゃん</h1>
@@ -15,7 +67,7 @@
   <p style="font-size: 2em;">他者（社）の権利を侵害しないために、個人での使用に限ります。</p>
   <p><br></p>
   <div class="button-row">
-    <button id="agreeButton" class="agree"><a href='entry.html'>了解</a></button>
+    <button id="agreeButton"><a href='entry.html'>了解</a></button>
   </div>
 </body>
 </html>

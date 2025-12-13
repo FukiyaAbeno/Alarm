@@ -1,3 +1,4 @@
+/* Style : Common */
 body {
   font-family: sans-serif;
   text-align: center;
@@ -29,6 +30,7 @@ h1 {
   margin-top: 1em;
 }
 
+/* Style for buttons */
 button {
   width: 150px;
   height: 120px;
@@ -44,50 +46,13 @@ button {
   line-height: 1;
 }
 
-a:link {
-  color: white;
-  text-decoration: none;
-}
-
-a:visited {
-  color: white;
-  text-decoration: none;
-}
-
-a:hover {
-  color: white;
-  text-decoration: underline;
-}
-
-button.agree {
-  background-color: black;
-  color: white;
-  height: 110px;
-  font-size: 3em;
-}
-
-button.yellow {
+button.hajime {
   background-color: #fdd835;
   color: black;
 }
 
-button.green {
-  background-color: green;
-  color: white;
-}
-
-button.black {
+button.shuryo {
   background-color: black;
-  color: white;
-}
-
-button.red {
-  background-color: red;
-  color: white;
-}
-
-button.olive {
-  background-color: #838383;
   color: white;
 }
 
@@ -96,11 +61,19 @@ button.active {
   box-shadow: 0 0 5px #2196f3;
 }
 
-button.wide {
-  /* background-color: grey;
-  color: white; */
+button.haneya_wide {
   width: 306px;
   height: 100px;
+}
+
+button.haneya_red {
+  background-color: red;
+  color: white;
+}
+
+button.haneya_grey {
+  background-color: #838383;
+  color: white;
 }
 
 footer {
@@ -108,51 +81,3 @@ footer {
   font-size: 0.75em;
   color: #555;
 }
-
-/* button.blink {
-  animation:blink 3s infinite alternate ease-in-out;
-} */
-
-/* @keyframes blink {
-  0%   { opacity: 1; } 
-  50%   { opacity: 0; } 
-  100% { opacity: 1; }
-} */
-
-/* button.pause {
-  width: 153px;
-  height: 60px;
-  background-color: #c6c6c9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4em;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  text-align: center;
-  line-height: 1;
-} */
-
-/* button.adjtime {
-  width: 314px;
-  height: 60px;
-  background-color: #3fdd3f;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.4em;
-  padding: 0;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 8px;
-  color: black;
-  text-align: center;
-  line-height: 1;
-} */
-
-/* button.enabled {
-  background-color: #3f4add;
-} */
